@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Predictions
+from .models import Predictions, Players
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -24,4 +24,14 @@ class PredictionsSerializer(serializers.ModelSerializer):
         "submission_date": { "read_only": True },
         "Player1WinOdds": { "read_only": True },
         "Player2WinOdds": { "read_only": True },
+    }
+
+class PlayersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Players
+        fields = '__all__'
+
+    extra_kwargs = {
+        "PlayerID": { "read_only": True },
+        "full_name": { "read_only": True },
     }
