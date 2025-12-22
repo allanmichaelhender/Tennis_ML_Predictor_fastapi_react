@@ -19,12 +19,12 @@ class PredictionsSerializer(serializers.ModelSerializer):
         model = Predictions
         fields = '__all__'
 
-    extra_kwargs = {
-        "author": { "read_only": True },
-        "submission_date": { "read_only": True },
-        "Player1WinOdds": { "read_only": True },
-        "Player2WinOdds": { "read_only": True },
-    }
+        extra_kwargs = {
+            "author": { "read_only": True },
+            "submission_date": { "read_only": True },
+            "Player1WinOdds": { "read_only": True },
+            "Player2WinOdds": { "read_only": True },
+        }
 
 class PlayersSerializer(serializers.ModelSerializer):
     class Meta:

@@ -13,3 +13,4 @@ django-q2
 requests
 joblib
 pandas
+scikit-learn

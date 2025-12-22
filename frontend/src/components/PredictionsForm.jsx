@@ -12,7 +12,9 @@ const PredictionsForm = ({ onSourceChange }) => {
     control,
     formState: { errors },
   } = useForm({
-    defaultValues: {},
+    defaultValues: {
+      player1_id: null,
+    },
   });
 
   const [players, setPlayers] = useState([]);
@@ -37,6 +39,7 @@ const PredictionsForm = ({ onSourceChange }) => {
   const today = new Date().toISOString().split("T")[0];
 
   const onSubmit = async (data) => {
+    console.log("Form Data:", data); 
     try {
       const response = await api.post("/api/predictions/", data);
       alert("Match Predicted!");

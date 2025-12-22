@@ -20,14 +20,28 @@ class PredictionsListCreate(generics.ListCreateAPIView):
         return Predictions.objects.filter(author=user)
     
     def perform_create(self, serializer):
-        if serializer.is_valid():
-            player1WinOddsLogistic, player2WinOddsLogistic = logistic_regression_predict(player1_full_name=, player2_full_name=)
-            serializer.save(author=self.request.user,
-                            
-                            
-                            
-                            )
-        else: print(serializer.errors)
+        # Access the data from validated_data
+        p1 = serializer.validated_data.get('player1_id')
+        p2 = serializer.validated_data.get('player2_id')
+        m_date = serializer.validated_data.get('match_date')
+
+        print("here")
+        # Call your prediction functions
+        [p2_log, p1_log] = logistic_regression_predict(player1_id=p1, player2_id=p2, match_date=m_date)
+        # [p2_rf, p1_rf] = random_forest_predict(player1_id=p1, player2_id=p2, match_date=m_date)
+        # [p2_dt, p1_dt] = decision_tree_predict(player1_id=p1, player2_id=p2, match_date=m_date)
+        print("here2")
+        print(p2_log,p1_log)
+
+        serializer.save(
+            author=self.request.user,
+            player1WinOddsLogistic=p1_log,
+            player2WinOddsLogistic=p2_log,
+            # player1WinOddsRForest=p1_rf,
+            # player2WinOddsRForest=p2_rf,
+            # player1WinOddsDTree=p1_dt,
+            # player2WinOddsDTree=p2_dt
+        )
 
 class PredictionsDelete(generics.DestroyAPIView):
     serializer_class = PredictionsSerializer
