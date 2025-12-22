@@ -9,8 +9,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 from scipy.stats import loguniform
 
-
-dataframe = pd.read_csv('ML_ready_data.csv', index_col=0)
+dataframe = pd.read_csv("../data/ML_ready_data.csv", index_col=0)
                         
 X = dataframe.drop(columns=["player1_win"])
 y = dataframe['player1_win']
@@ -18,12 +17,15 @@ x_train, x_test, y_train, y_test = train_test_split(X,y, test_size=0.2)
 
 logistic_regr_pipeline = Pipeline([
     ("scalar", StandardScaler()), 
-    ("regr", LogisticRegression(solver='liblinear', max_iter=1000))
-    ])
+    # Use 'saga' as it supports both l1 and l2 via the l1_ratio parameter
+    ("regr", LogisticRegression(solver='saga', max_iter=1000))
+])
 
 parameters = {    
     'regr__C': loguniform(0.001, 1000),
-    'regr__penalty': ['l1', 'l2']
+    # Use l1_ratio instead of penalty
+    # 0 is L2 (Ridge), 1 is L1 (Lasso)
+    'regr__l1_ratio': [0, 1] 
 }
 
 clf = RandomizedSearchCV(logistic_regr_pipeline, parameters, n_iter=50, cv=5)

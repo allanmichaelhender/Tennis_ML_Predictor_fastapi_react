@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 import joblib
 
 
-dataframe = pd.read_csv('ML_ready_data.csv', index_col=0)
+dataframe = pd.read_csv("../data/ML_ready_data.csv", index_col=0)
                         
 X = dataframe.drop(columns=["player1_win"])
 y = dataframe['player1_win']
