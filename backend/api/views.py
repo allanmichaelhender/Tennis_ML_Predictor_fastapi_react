@@ -4,6 +4,7 @@ from .serializers import UserSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Predictions, Players
 from .serializers import PredictionsSerializer, PlayersSerializer
+from .predictor_functions import logistic_regression_predict, random_forest_predict, decision_tree_predict
 
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -20,7 +21,12 @@ class PredictionsListCreate(generics.ListCreateAPIView):
     
     def perform_create(self, serializer):
         if serializer.is_valid():
-            serializer.save(author=self.request.user)
+            player1WinOddsLogistic, player2WinOddsLogistic = logistic_regression_predict(player1_full_name=, player2_full_name=)
+            serializer.save(author=self.request.user,
+                            
+                            
+                            
+                            )
         else: print(serializer.errors)
 
 class PredictionsDelete(generics.DestroyAPIView):

@@ -12,3 +12,4 @@ django-environ
 django-q2
 requests
 joblib
+pandas
