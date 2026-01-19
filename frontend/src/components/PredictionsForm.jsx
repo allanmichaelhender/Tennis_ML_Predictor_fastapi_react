@@ -5,7 +5,7 @@ import api from "../api";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 
-const PredictionsForm = ({isLoggedIn, onPredictionCreated}) => {
+const PredictionsForm = ({ isLoggedIn, onPredictionCreated }) => {
   const {
     register,
     handleSubmit,
@@ -23,7 +23,6 @@ const PredictionsForm = ({isLoggedIn, onPredictionCreated}) => {
     api
       .get("/api/players/")
       .then((response) => {
-        // Axios puts the response data in a 'data' property
         const formattedPlayers = response.data.map((p) => ({
           value: p.player_id,
           label: p.full_name,
@@ -31,32 +30,33 @@ const PredictionsForm = ({isLoggedIn, onPredictionCreated}) => {
         setPlayers(formattedPlayers);
       })
       .catch((err) => {
-        // Axios automatically catches 4xx and 5xx errors
         console.error("API error:", err.message);
       });
   }, []);
 
   const today = new Date().toISOString().split("T")[0];
 
-const onSubmit = async (data) => {
+  const onSubmit = async (data) => {
     // 1. Determine endpoint
-    const endpoint = isLoggedIn ? "/api/predictions/" : "/api/predictions-guest/";
+    const endpoint = isLoggedIn
+      ? "/api/predictions/"
+      : "/api/predictions-guest/";
 
     try {
-        const response = await api.post(endpoint, data);
-        alert("Match Predicted!");
+      const response = await api.post(endpoint, data);
+      alert("Match Predicted!");
 
-        // 2. Use the new prop 'onPredictionCreated' for BOTH cases.
-        // Even if logged in, passing response.data is faster than re-fetching the whole list.
-        if (onPredictionCreated) {
-            onPredictionCreated(response.data);
-        }
-
+      if (onPredictionCreated) {
+        onPredictionCreated(response.data);
+      }
     } catch (error) {
-        console.error("Submission failed:", error.response?.data || error.message);
-        alert("Failed to predict match.");
+      console.error(
+        "Submission failed:",
+        error.response?.data || error.message,
+      );
+      alert("Failed to predict match.");
     }
-};
+  };
 
   const onError = (errors) => console.log("Form Validation Errors:", errors);
 

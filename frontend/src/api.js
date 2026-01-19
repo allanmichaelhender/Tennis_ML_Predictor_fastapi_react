@@ -17,36 +17,44 @@ api.interceptors.request.use(
 );
 
 api.interceptors.response.use(
-  (response) => response, 
+  (response) => response,
   async (error) => {
     const originalRequest = error.config;
 
     if (error.response?.status === 401 && !originalRequest._retry) {
+      const refreshToken = localStorage.getItem(REFRESH_TOKEN);
+
+      if (!refreshToken) {
+        return Promise.reject(error);
+      }
+
       originalRequest._retry = true;
 
       try {
-        const refreshToken = localStorage.getItem(REFRESH_TOKEN);
-        
-        const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/token/refresh/`, {
-          refresh: refreshToken,
-        });
+        const response = await axios.post(
+          `${import.meta.env.VITE_API_URL}/api/token/refresh/`,
+          {
+            refresh: refreshToken,
+          },
+        );
 
         if (response.status === 200) {
           const newToken = response.data.access;
           localStorage.setItem(ACCESS_TOKEN, newToken);
-
           originalRequest.headers.Authorization = `Bearer ${newToken}`;
           return api(originalRequest);
         }
       } catch (refreshError) {
-        localStorage.clear();
-        window.location.href = "/login";
+        localStorage.removeItem(ACCESS_TOKEN);
+        localStorage.removeItem(REFRESH_TOKEN);
+
         return Promise.reject(refreshError);
       }
     }
 
     return Promise.reject(error);
-  }
+  },
 );
+
 
 export default api;

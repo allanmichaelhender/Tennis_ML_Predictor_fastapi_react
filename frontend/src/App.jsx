@@ -13,10 +13,8 @@ function Logout({ onLogout }) {
 }
 
 function App() {
-  // Use state so all children re-render when this changes
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem(ACCESS_TOKEN));
 
-  // Function to refresh the login state
   const updateAuthStatus = () => {
     setIsLoggedIn(!!localStorage.getItem(ACCESS_TOKEN));
   };
@@ -26,12 +24,10 @@ function App() {
       <Routes>
         <Route
           path="/"
-          // Pass the reactive isLoggedIn state down to Home
           element={<Home isLoggedIn={isLoggedIn} />}
         />
         <Route 
           path="/login" 
-          // Pass the update function so Login can trigger a re-render
           element={<Login onLoginSuccess={updateAuthStatus} />} 
         />
         <Route path="/logout" element={<Logout onLogout={updateAuthStatus} />} />

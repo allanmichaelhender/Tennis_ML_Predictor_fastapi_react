@@ -12,7 +12,6 @@ export default function Prediction({ prediction, onDelete }) {
       <p className="note-title">player1_id {prediction.player1_id}</p>
       <p className="note-content">player2_id {prediction.player2_id}</p>
       <p className="note-content">match_date {prediction.match_date}</p>
-      <p className="note-content">submission_date {formattedDate}</p>
       <p className="note-content">player1WinOddsLogistic {prediction.player1WinOddsLogistic}</p>
       <p className="note-content">player2WinOddsLogistic {prediction.player2WinOddsLogistic}</p>
       <p className="note-content">player1WinOddsRForest {prediction.player1WinOddsRForest}</p>

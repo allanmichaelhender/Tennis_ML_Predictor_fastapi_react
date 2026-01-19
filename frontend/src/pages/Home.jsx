@@ -8,15 +8,13 @@ function Home({ isLoggedIn }) {
   const [predictions, setPredictions] = useState([]);
   console.log(isLoggedIn);
 
-  // This effect now only handles FETCHING data when the login status is true
   useEffect(() => {
     if (isLoggedIn) {
       getPredictions();
     } else {
-      // Clear predictions if they log out, or keep empty for guest
       setPredictions([]);
     }
-  }, [isLoggedIn]); // Re-run whenever isLoggedIn prop changes
+  }, [isLoggedIn]); 
 
   const getPredictions = async () => {
     try {
@@ -28,7 +26,6 @@ function Home({ isLoggedIn }) {
   };
 
   const handleNewPrediction = (predictionData) => {
-    // For guests, predictionData is the direct JSON result from your POST response
     setPredictions((prev) => [predictionData, ...prev]);
   };
 

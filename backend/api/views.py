@@ -104,3 +104,5 @@ class PredictionsDelete(generics.DestroyAPIView):
 class PlayersView(generics.ListAPIView):
     queryset = Players.objects.all()
     serializer_class = PlayersSerializer
+    permission_classes = [AllowAny]
+
