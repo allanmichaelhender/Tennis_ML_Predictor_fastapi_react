@@ -5,7 +5,7 @@ import api from "../api";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 
-const PredictionsForm = ({ onSourceChange }) => {
+const PredictionsForm = ({isLoggedIn, onPredictionCreated}) => {
   const {
     register,
     handleSubmit,
@@ -38,16 +38,25 @@ const PredictionsForm = ({ onSourceChange }) => {
 
   const today = new Date().toISOString().split("T")[0];
 
-  const onSubmit = async (data) => {
-    console.log("Form Data:", data); 
+const onSubmit = async (data) => {
+    // 1. Determine endpoint
+    const endpoint = isLoggedIn ? "/api/predictions/" : "/api/predictions-guest/";
+
     try {
-      const response = await api.post("/api/predictions/", data);
-      alert("Match Predicted!");
-      onSourceChange();
+        const response = await api.post(endpoint, data);
+        alert("Match Predicted!");
+
+        // 2. Use the new prop 'onPredictionCreated' for BOTH cases.
+        // Even if logged in, passing response.data is faster than re-fetching the whole list.
+        if (onPredictionCreated) {
+            onPredictionCreated(response.data);
+        }
+
     } catch (error) {
-      console.error("Submission failed:", error.response?.data);
+        console.error("Submission failed:", error.response?.data || error.message);
+        alert("Failed to predict match.");
     }
-  };
+};
 
   const onError = (errors) => console.log("Form Validation Errors:", errors);
 
