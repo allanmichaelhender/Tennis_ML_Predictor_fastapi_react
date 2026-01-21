@@ -9,7 +9,8 @@ from sklearn.impute import SimpleImputer
 from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 from scipy.stats import loguniform
 
-dataframe = pd.read_csv("../data/ML_ready_data.csv", index_col=0)
+dataframe = pd.read_csv("../data/new_data/ML_ready_data.csv", index_col=0)
+
                         
 X = dataframe.drop(columns=["player1_win"])
 y = dataframe['player1_win']

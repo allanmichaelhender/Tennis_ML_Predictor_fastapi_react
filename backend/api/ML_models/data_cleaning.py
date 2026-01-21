@@ -2,21 +2,27 @@ import pandas as pd
 import numpy as np
 from data_functions import calculate_games_add_tiebreak
 
-data_2015 = pd.read_csv('Data/atp_matches_2015.csv')
-data_2016 = pd.read_csv('Data/atp_matches_2016.csv')
-data_2017 = pd.read_csv('Data/atp_matches_2017.csv')
-data_2018 = pd.read_csv('Data/atp_matches_2018.csv')
-data_2019 = pd.read_csv('Data/atp_matches_2019.csv')
-data_2020 = pd.read_csv('Data/atp_matches_2020.csv')
-data_2021 = pd.read_csv('Data/atp_matches_2021.csv')
-data_2022 = pd.read_csv('Data/atp_matches_2022.csv')
-data_2023 = pd.read_csv('Data/atp_matches_2023.csv')
-data_2024 = pd.read_csv('Data/atp_matches_2024.csv')
+# data_2015 = pd.read_csv('Data/atp_matches_2015.csv')
+# data_2016 = pd.read_csv('Data/atp_matches_2016.csv')
+# data_2017 = pd.read_csv('Data/atp_matches_2017.csv')
+# data_2018 = pd.read_csv('Data/atp_matches_2018.csv')
+# data_2019 = pd.read_csv('Data/atp_matches_2019.csv')
+# data_2020 = pd.read_csv('Data/atp_matches_2020.csv')
+# data_2021 = pd.read_csv('Data/atp_matches_2021.csv')
+# data_2022 = pd.read_csv('Data/atp_matches_2022.csv')
+# data_2023 = pd.read_csv('Data/atp_matches_2023.csv')
+data_2024 = pd.read_csv('Data/new_data/2024.csv')
+data_2025 = pd.read_csv('Data/new_data/2025.csv')
+data_2026 = pd.read_csv('Data/new_data/2026.csv')
 
 
-index_range = len(data_2024) + len(data_2023) + len(data_2022) + len(data_2021) + len(data_2020) + len(data_2019) + len(data_2018) + len(data_2017) + len(data_2016)
 
-data = pd.concat([data_2024,data_2023,data_2022,data_2021,data_2020,data_2019,data_2018,data_2017,data_2016,data_2015]).sort_values('tourney_date').reset_index(drop=True)
+
+# index_range = len(data_2024) + len(data_2023) + len(data_2022) + len(data_2021) + len(data_2020) + len(data_2019) + len(data_2018) + len(data_2017) + len(data_2016)
+# index_range = len(data_2026) + len(data_2025) + len(data_2024)
+# print(index_range)
+
+data = pd.concat([data_2026,data_2025,data_2024]).sort_values('tourney_date').reset_index(drop=True)
 data.drop(columns=["winner_seed", "winner_entry","loser_seed", "loser_entry", "minutes"], inplace=True)
 data.dropna(inplace=True)
 data.reset_index(drop=True)

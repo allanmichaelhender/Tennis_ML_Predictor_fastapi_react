@@ -5,7 +5,7 @@ from api.models import Players
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        file_path = settings.BASE_DIR / 'api' / 'ML_models' / 'data' / 'players_data.csv'
+        file_path = settings.BASE_DIR / 'api' / 'ML_models' / 'data' / 'new_data' / 'players.csv'
         
         with open(file_path, mode='r', encoding='utf-8') as f:
             reader = csv.DictReader(f)

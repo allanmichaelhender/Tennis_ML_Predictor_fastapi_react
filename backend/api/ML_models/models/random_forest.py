@@ -7,7 +7,7 @@ import  joblib
 from sklearn.metrics import classification_report
 
 
-dataframe = pd.read_csv("../data/ML_ready_data.csv", index_col=0)
+dataframe = pd.read_csv("../data/new_data/ML_ready_data.csv", index_col=0)
                         
 # 1. Stratified split with fixed random state
 X = dataframe.drop(columns=["player1_win"])

@@ -12,7 +12,7 @@ logistic_regr_pipeline = joblib.load(logistic_regr_pipeline_path)
 decision_tree_pipeline_path = ML_models_dir / 'models/decision_tree_pipeline.joblib'
 decision_tree_pipeline = joblib.load(decision_tree_pipeline_path)
 
-data_path = ML_models_dir / 'data/data.csv'
+data_path = ML_models_dir / 'data/new_data/data.csv'
 data = pd.read_csv(data_path,index_col=0)
 data['tourney_date'] = pd.to_datetime(data['tourney_date'])
 
