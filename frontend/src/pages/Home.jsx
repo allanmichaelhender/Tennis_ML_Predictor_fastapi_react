@@ -5,6 +5,7 @@ import Prediction from "../components/Prediction";
 import "../styles/Home.css";
 import "../styles/Form.css";
 import "../styles/Prediction.css";
+import { v4 as uuidv4 } from 'uuid';
 
 function Home({ isLoggedIn }) {
   const [predictions, setPredictions] = useState([]);
@@ -46,7 +47,7 @@ function Home({ isLoggedIn }) {
 const handleNewPrediction = (predictionData) => {
   const predictionWithId = {
     ...predictionData,
-    id: predictionData.id || crypto.randomUUID()
+    id: predictionData.id || uuidv4()
   };
 
   setPredictions((prev) => [predictionWithId, ...prev]);
