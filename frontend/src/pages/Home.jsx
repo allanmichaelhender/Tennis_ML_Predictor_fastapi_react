@@ -72,8 +72,6 @@ const handleNewPrediction = (predictionData) => {
     }
   };
 
-  console.log("Prediction IDs:", predictions.map(p => p.id));
-  
   return (
     <div className="home-wrapper">
       {" "}
