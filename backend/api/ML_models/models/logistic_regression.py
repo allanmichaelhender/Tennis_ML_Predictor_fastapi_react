@@ -18,14 +18,11 @@ x_train, x_test, y_train, y_test = train_test_split(X,y, test_size=0.2)
 
 logistic_regr_pipeline = Pipeline([
     ("scalar", StandardScaler()), 
-    # Use 'saga' as it supports both l1 and l2 via the l1_ratio parameter
     ("regr", LogisticRegression(solver='saga', max_iter=1000))
 ])
 
 parameters = {    
     'regr__C': loguniform(0.001, 1000),
-    # Use l1_ratio instead of penalty
-    # 0 is L2 (Ridge), 1 is L1 (Lasso)
     'regr__l1_ratio': [0, 1] 
 }
 
