@@ -75,8 +75,6 @@ const handleNewPrediction = (predictionData) => {
 
   return (
     <div className="home-wrapper">
-      {" "}
-      {/* Add a wrapper for overall spacing */}
       <PredictionsForm
         onPredictionCreated={handleNewPrediction}
         isLoggedIn={isLoggedIn}

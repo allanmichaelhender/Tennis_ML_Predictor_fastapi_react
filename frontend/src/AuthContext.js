@@ -4,10 +4,8 @@ import { ACCESS_TOKEN, REFRESH_TOKEN } from "./constants";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  // Use a function in useState so it only runs once on initial load
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     const token = localStorage.getItem(ACCESS_TOKEN);
-    // Check if token exists and isn't the literal string "null" or "undefined"
     return !!token && token !== "undefined" && token !== "null";
   });
 

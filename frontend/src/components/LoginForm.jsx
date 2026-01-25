@@ -23,12 +23,10 @@ function LoginForm({ onLoginSuccess, route, method }) {
         localStorage.setItem(ACCESS_TOKEN, res.data.access);
         localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
 
-        // 1. Call the callback if it exists to update parent state
         if (onLoginSuccess) {
           onLoginSuccess();
         }
 
-        // 2. Navigate home
         navigate("/");
       } else {
         navigate("/login");

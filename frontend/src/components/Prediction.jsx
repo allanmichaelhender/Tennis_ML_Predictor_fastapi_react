@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles/Note.css";
 
 export default function Prediction({ prediction, onDelete, players }) {
   const player1Obj = players.find((p) => String(p.value) === String(prediction.player1_id));
