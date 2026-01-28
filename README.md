@@ -60,7 +60,7 @@ Here's how I deploy this project:
 Frontend
 1. Install dependencies: `npm install`
 2. Build production version: `npm run build`
-3. Deploy the `dist` folder to AWS (or other site)
+3. Deploy the `dist` folder to AWS (or other platform)
 4. Connect to Backend with VITE_API_URL environmental variable
 5. Configure Nginx
 
