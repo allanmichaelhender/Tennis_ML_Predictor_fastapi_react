@@ -1,17 +1,24 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
-from typing import List
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
+from sqlalchemy import text
+from backend.deps import get_db
 
-class Settings(BaseSettings):
-    PROJECT_NAME: str = "My FastAPI Project"
-    API_V1_STR: str = "/api/v1"
-    
-    # Example: postgresql+psycopg2://user:pass@localhost:5432/db
-    DATABASE_URL: str = "sqlite:///./sql_app.db"
-    
-    # List of origins allowed to make CORS requests
-    BACKEND_CORS_ORIGINS: List[str] = ["http://localhost:3000"]
+api_router = APIRouter()
 
-    # Tells Pydantic to read from a .env file
-    model_config = SettingsConfigDict(env_file=".env", case_sensitive=True)
+# Example: Including user endpoints
+# api_router.include_router(users.router, prefix="/users", tags=["users"])
 
-settings = Settings()
+# For now, let's add a health check directly
+@api_router.get("/health", tags=["health"])
+def health_check():
+    return {"status": "ok"}
+
+@api_router.get("/db-test")
+def test_db_connection(db: Session = Depends(get_db)):
+    try:
+        # Executes a simple 'SELECT 1' to verify the connection
+        result = db.execute(text("SELECT version();"))
+        version = result.fetchone()
+        return {"status": "connected", "database_version": version[0]}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Database connection failed: {str(e)}")
