@@ -1,4 +1,5 @@
 from datetime import timedelta
+import token
 from typing import Any
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
@@ -31,15 +32,16 @@ def register_user(
         )
     return user_crud.create(db, obj_in=user_in)
 
-@router.post("/login/access-token")
+@router.post("/login/access-token", response_model=token_schema.Token)
 def login_access_token(db: Session = Depends(deps.get_db), form_data: OAuth2PasswordRequestForm = Depends()):
     user = user_crud.authenticate(db, username=form_data.username, password=form_data.password)
     if not user:
         raise HTTPException(status_code=400, detail="Incorrect username or password")
     
+    # We pass user.id as the 'subject'
     return {
-        "access_token": security.create_access_token(user.id),
-        "refresh_token": security.create_refresh_token(user.id),
+        "access_token": security.create_access_token(subject=user.id),
+        "refresh_token": security.create_refresh_token(subject=user.id),
         "token_type": "bearer",
     }
 

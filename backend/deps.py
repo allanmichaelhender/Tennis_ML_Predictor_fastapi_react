@@ -5,7 +5,9 @@ from fastapi.security import OAuth2PasswordBearer
 import jwt
 from sqlalchemy.orm import Session
 from core.config import settings
-import crud, models, schemas
+from crud.user import get as get_user
+import models
+from schemas.token import TokenPayload
 from models.user import User
 
 def get_db() -> Generator:
@@ -23,16 +25,14 @@ def get_current_user(
     token: str = Depends(oauth2_scheme)
 ) -> User:
     try:
-        payload = jwt.decode(
-            token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
-        )
-        token_data = schemas.TokenPayload(**payload)
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+        token_data = TokenPayload(**payload)
     except (jwt.InvalidTokenError, jwt.exceptions.PyJWTError):
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Could not validate credentials",
-        )
-    user = crud.user.get(db, id=token_data.sub)
+        raise HTTPException(status_code=403, detail="Could not validate credentials")
+    
+    # Use the new 'get' function by ID
+    user = get_user(db, id=int(token_data.sub)) 
+    
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     return user

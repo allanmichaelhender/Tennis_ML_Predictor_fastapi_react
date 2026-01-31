@@ -23,3 +23,7 @@ def authenticate(db: Session, *, username: str, password: str):
     if not security.verify_password(password, user.hashed_password):
         return None
     return user
+
+
+def get(db: Session, id: int):
+    return db.query(User).filter(User.id == id).first()
