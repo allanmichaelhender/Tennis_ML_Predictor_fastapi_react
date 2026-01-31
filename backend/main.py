@@ -1,17 +1,19 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
-from backend.api.api import api_router   
-from backend.core.config import settings
+from api.api import api_router
+from core.config import settings
+from auth import router as auth_router  # Import your new router
+from schemas import user
+from deps import get_current_user
+
 
 def get_application() -> FastAPI:
-    # Initialize FastAPI with project metadata
     _app = FastAPI(
         title=settings.PROJECT_NAME,
-        openapi_url=f"{settings.API_V1_STR}/openapi.json"
+        # Ensure settings.API_V1_STR is exactly what you expect (e.g., "/api/v1")
+        openapi_url=f"{settings.API_V1_STR}/openapi.json",
     )
 
-    # Set up CORS (Cross-Origin Resource Sharing)
-    # Essential for allowing your frontend to talk to this backend
     _app.add_middleware(
         CORSMiddleware,
         allow_origins=[str(origin) for origin in settings.BACKEND_CORS_ORIGINS],
@@ -20,10 +22,23 @@ def get_application() -> FastAPI:
         allow_headers=["*"],
     )
 
-    # Include all routes from our API router
-    # This automatically prefixes all endpoints with /api/v1
+    # Include your auth routes
+    _app.include_router(auth_router, prefix="/auth", tags=["Authentication"])
+
+    # Include your versioned API routes
     _app.include_router(api_router, prefix=settings.API_V1_STR)
 
     return _app
 
+
 app = get_application()
+
+
+@app.get("/")
+def root():
+    return {"message": "Server is running"}
+
+@app.get("/users/me", response_model=user.UserOut)
+def read_user_me(current_user: user.UserOut = Depends(get_current_user)):
+    return current_user
+
