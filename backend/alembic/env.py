@@ -11,6 +11,7 @@ sys.path.insert(0, os.getcwd())
 from core.config import settings
 from db.base_class import Base
 from models.user import User  # Registers the model
+from models.players import Player
 
 # 3. Config
 config = context.config
