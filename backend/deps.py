@@ -28,7 +28,7 @@ def get_current_user(
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
         token_data = TokenPayload(**payload)
     except (jwt.InvalidTokenError, jwt.exceptions.PyJWTError):
-        raise HTTPException(status_code=403, detail="Could not validate credentials")
+        raise HTTPException(status_code=401, detail="Could not validate credentials")
     
     # Use the new 'get' function by ID
     user = get_user(db, id=int(token_data.sub)) 

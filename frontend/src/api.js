@@ -32,14 +32,14 @@ api.interceptors.response.use(
 
       try {
         const response = await axios.post(
-          `${import.meta.env.VITE_API_URL}/api/token/refresh/`,
+          `${import.meta.env.VITE_API_URL}/auth/refresh/`,
           {
             refresh: refreshToken,
           },
         );
 
         if (response.status === 200) {
-          const newToken = response.data.access;
+          const newToken = response.data.access_token;
           localStorage.setItem(ACCESS_TOKEN, newToken);
           originalRequest.headers.Authorization = `Bearer ${newToken}`;
           return api(originalRequest);

@@ -43,11 +43,6 @@ def generate_data(player1_id, player2_id, match_date):
     player2_w = data_last_six_months[player2_w_filter]
     player2_l = data_last_six_months[player2_l_filter]
 
-    print("1:",player1_w.head())
-    print("2:",player2_w.head())
-    print("3:",player1_l.head())
-    print("4:",player2_l.head())
-
 
     def find_ranking_points(player_w, player_l):
         w_ranking_points = player_w["winner_rank_points"].iloc[0] if not player_w.empty else 0

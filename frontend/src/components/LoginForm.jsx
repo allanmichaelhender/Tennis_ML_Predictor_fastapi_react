@@ -18,21 +18,31 @@ function LoginForm({ onLoginSuccess, route, method }) {
     e.preventDefault();
 
     try {
-      const res = await api.post(route, { username, password });
+      let res;
       if (method === "login") {
-        localStorage.setItem(ACCESS_TOKEN, res.data.access);
-        localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+        const formData = new FormData();
+        formData.append("username", username);
+        formData.append("password", password);
 
-        if (onLoginSuccess) {
-          onLoginSuccess();
-        }
+        res = await api.post(route, formData);
 
+        localStorage.setItem(ACCESS_TOKEN, res.data.access_token);
+        localStorage.setItem(REFRESH_TOKEN, res.data.refresh_token);
+
+        if (onLoginSuccess) onLoginSuccess();
         navigate("/");
       } else {
-        navigate("/login");
-      }
+    await api.post(route, { 
+        username: username, 
+        password: password 
+    });
+    
+    alert("Registration successful! Please login.");
+    navigate("/login");
+}
     } catch (error) {
-      alert(error);
+      const errorDetail = error.response?.data?.detail || error.message;
+      alert(`Error: ${JSON.stringify(errorDetail)}`);
     } finally {
       setLoading(false);
     }

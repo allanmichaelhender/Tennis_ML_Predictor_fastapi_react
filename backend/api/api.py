@@ -2,8 +2,10 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 from deps import get_db
+from api.predictions import router as predictions_router
 
 api_router = APIRouter()
+api_router.include_router(predictions_router, prefix="/predictions", tags=["Predictions"])
 
 
 @api_router.get("/health", tags=["health"])
