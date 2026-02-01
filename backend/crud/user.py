@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from core import security
-from models.user import User  # Ensure this points to your User model
+from models.user import User
 from schemas.user import UserCreate
 
 def get_by_username(db: Session, username: str):

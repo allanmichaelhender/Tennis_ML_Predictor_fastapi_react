@@ -14,10 +14,6 @@ class Settings(BaseSettings):
         extra="ignore", 
     )
 
-    # List of origins allowed to make CORS requests
-    BACKEND_CORS_ORIGINS: List[str] = ["http://localhost:3000"]
-
-    # Tells Pydantic to read from a .env file
     model_config = SettingsConfigDict(env_file=".env", case_sensitive=True)
 
     SECRET_KEY: str = "YOUR_SUPER_SECRET_RANDOM_KEY" 

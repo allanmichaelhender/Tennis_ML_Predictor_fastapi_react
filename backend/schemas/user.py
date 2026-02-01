@@ -10,4 +10,4 @@ class UserOut(UserBase):
     id: int
 
     class Config:
-        from_attributes = True # Allows Pydantic to read SQLAlchemy objects
+        from_attributes = True 

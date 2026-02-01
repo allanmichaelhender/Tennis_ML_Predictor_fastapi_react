@@ -7,6 +7,7 @@ class PredictionCreate(BaseModel):
     match_date: date
 
 class PredictionOut(PredictionCreate):
+    id: int
     player1_id: str
     player2_id: str
     match_date: date

@@ -7,8 +7,8 @@ class Token(BaseModel):
     refresh_token: str | None = None
 
 class TokenPayload(BaseModel):
-    sub: str | None = None  # This is the user_id/username
-    exp: int | None = None  # Expiration timestamp
+    sub: str | None = None 
+    exp: int | None = None 
 
 
 

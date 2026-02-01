@@ -1,3 +1,2 @@
-# Import the Base and all models here
-from db.base_class import Base  # noqa
-from models.user import User  # noqa
+from db.base_class import Base  
+from models.user import User  

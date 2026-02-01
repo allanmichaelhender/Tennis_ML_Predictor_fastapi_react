@@ -21,8 +21,8 @@ class Prediction(Base):
 
     submission_date = Column(DateTime, default=datetime.utcnow)
     
-    # ForeignKey linking to your 'users' table id
     author_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     
-    # Optional: Relationship to access user info from prediction (prediction.author)
     author = relationship("User", back_populates="predictions")
+
+

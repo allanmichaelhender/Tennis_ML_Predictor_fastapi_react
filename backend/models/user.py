@@ -8,7 +8,6 @@ class User(Base):
     username: Mapped[str] = mapped_column(unique=True, index=True, nullable=False)
     hashed_password: Mapped[str] = mapped_column(nullable=False)
 
-    # Inside class User(Base):
     predictions = relationship("Prediction", back_populates="author", cascade="all, delete-orphan")
 
 

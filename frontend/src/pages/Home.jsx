@@ -22,7 +22,7 @@ function Home({ isLoggedIn }) {
 
   useEffect(() => {
     api
-      .get("/api/players/")
+      .get("/api/v1/players/")
       .then((response) => {
         const formattedPlayers = response.data.map((p) => ({
           value: p.player_id,
@@ -37,7 +37,7 @@ function Home({ isLoggedIn }) {
 
   const getPredictions = async () => {
     try {
-      const res = await api.get("/api/predictions/");
+      const res = await api.get("/api/v1/predictions/");
       setPredictions(res.data);
     } catch (err) {
       alert(err);
@@ -56,7 +56,8 @@ const handleNewPrediction = (predictionData) => {
   const deletePrediction = async (id) => {
     if (isLoggedIn) {
       try {
-        const res = await api.delete(`/api/predictions/${id}/`);
+        console.log(id)
+        const res = await api.delete(`/api/v1/predictions/${id}/`);
 
         if (res.status === 204) {
           alert("Prediction deleted!");

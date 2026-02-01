@@ -27,8 +27,8 @@ const PredictionsForm = ({ isLoggedIn, onPredictionCreated, players }) => {
 
   const onSubmit = async (data) => {
     const endpoint = isLoggedIn
-      ? "/api/predictions/"
-      : "/api/predictions-guest/";
+      ? "/api/v1/predictions/"
+      : "/api/v1/predictions/guest/";
 
     try {
       const response = await api.post(endpoint, data);

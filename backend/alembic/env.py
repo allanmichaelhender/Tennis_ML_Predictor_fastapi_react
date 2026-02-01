@@ -4,13 +4,11 @@ from logging.config import fileConfig
 from sqlalchemy import engine_from_config, pool
 from alembic import context
 
-# 1. Path setup
 sys.path.insert(0, os.getcwd())
 
-# 2. Imports
 from core.config import settings
 from db.base_class import Base
-from models.user import User  # Registers the model
+from models.user import User 
 from models.players import Player
 from models.predictions import Prediction
 

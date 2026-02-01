@@ -30,7 +30,6 @@ def get_current_user(
     except (jwt.InvalidTokenError, jwt.exceptions.PyJWTError):
         raise HTTPException(status_code=401, detail="Could not validate credentials")
     
-    # Use the new 'get' function by ID
     user = get_user(db, id=int(token_data.sub)) 
     
     if not user:

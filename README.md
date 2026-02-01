@@ -23,10 +23,10 @@ I've deployed a working version here:
 React · Vite  
 
 **Backend:**  
-Django · scikit-learn for ML Models 
+FastAPI · scikit-learn for ML Models 
 
 **Database:**  
-PostgreSQL  
+PostgreSQL (with SQLAlchemy and Alembic in the Backend)
 
 **DevOps:**  
 GitHub · AWS
@@ -40,9 +40,21 @@ Here's how I organized my code:
 
 ```
 backend/
-├── backend/          # Django settings/setup directory
+├── alembic/          # Alembic setup
 ├── api/              # Main application code
 │   ├── ML_models/    # Machine Learning models and data
+│   ├── api.py        # Collating the api endpoints
+│   ├── players.py    # Player endpoints to serve top players list to frontend
+│   ├── predictions.py    # Endpoints to serve ML model calulations 
+│   ├── predictor_functions.py    # Functions to predict the matches
+├── core/             # Config and security files
+├── crud/             # user endpoints
+├── db/               # SQLAlchemy/database setup
+├── models/           # SQLAlchemy models
+├── schemas/          # Pydantic schemas for data consistency
+├── main.py           # Main application file
+├── auth.py           # Handles JWT tokens/user authentication
+
 
 frontend/
 ├── src/              # Main source code
