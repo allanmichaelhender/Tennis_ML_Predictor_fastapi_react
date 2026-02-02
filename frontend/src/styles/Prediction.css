@@ -5,8 +5,8 @@
   padding: 20px;
   margin-bottom: 20px;
   max-width: 600px;         
-  width: 90%;          /* Responsive: takes 90% of wrapper on small screens */
-  margin: 0 auto;      /* Extra safety to keep it centered */
+  width: 90%;        
+  margin: 0 auto;      
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   position: relative;
   border-left: 5px solid #2ecc71; 
@@ -48,38 +48,66 @@
   margin-top: 5px;
 }
 
+
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1.2fr 1.2fr; 
   gap: 10px;
+  margin-top: 15px;
+  background: #f8f9fa; 
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.model-labels {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; 
+  gap: 12px;
+}
+
+.model-labels p {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #95a5a6;
+  margin: 0;
+  height: 20px; 
+  line-height: 20px;
+}
+
+.player-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   text-align: center;
 }
 
-.model-column h4 {
+.player-sub-name {
   font-size: 0.75rem;
+  font-weight: bold;
+  color: #2c3e50;
   text-transform: uppercase;
-  color: #95a5a6;
-  margin-bottom: 8px;
-}
-
-.odds-row {
-  display: flex;
-  flex-direction: column;
-  background: #f8f9fa;
-  border-radius: 6px;
-  padding: 8px 0;
+  border-bottom: 2px solid #2ecc71; 
+  margin-bottom: 4px;
+  padding-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .odds-val {
   font-weight: 700;
   font-size: 1rem;
-  color: #27ae60;
+  color: #7f8c8d; 
+  margin: 0;
+  height: 20px;
+  line-height: 20px;
 }
 
-.odds-val:first-child {
-  border-bottom: 1px solid #e0e0e0;
-  padding-bottom: 4px;
-  margin-bottom: 4px;
+.odds-val.winner {
+  color: #27ae60; 
+  font-size: 1.1rem; 
 }
 
 .delete-icon-button {
@@ -92,4 +120,10 @@
   font-size: 1.5rem;
   cursor: pointer;
   line-height: 1;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.delete-icon-button:hover {
+  opacity: 1;
 }

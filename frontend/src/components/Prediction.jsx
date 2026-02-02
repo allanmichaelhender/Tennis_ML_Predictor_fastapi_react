@@ -14,7 +14,9 @@ export default function Prediction({ prediction, onDelete, players }) {
 
   const formatOdds = (val) => (val != null ? Number(val).toFixed(3) : "N/A");
 
-  return (
+  const isWinner = (val1, val2) => (val1 > val2 ? "winner" : "");
+
+ return (
     <div className="prediction-card">
       <div className="card-header">
         <div className="matchup">
@@ -26,48 +28,41 @@ export default function Prediction({ prediction, onDelete, players }) {
       </div>
 
       <div className="stats-grid">
-        <div className="model-column">
-          <h4>Logistic</h4>
-          <div className="odds-row">
-            <span className="odds-val">
-              {formatOdds(prediction.player1WinOddsLogistic)}
-            </span>
-            <span className="odds-val">
-              {formatOdds(prediction.player2WinOddsLogistic)}
-            </span>
-          </div>
+        <div className="model-labels">
+          <div className="spacer" style={{ height: "20px" }}></div>
+          <p>Logistic</p>
+          <p>R-Forest</p>
+          <p>D-Tree</p>
         </div>
 
-        <div className="model-column">
-          <h4>R-Forest</h4>
-          <div className="odds-row">
-            <span className="odds-val">
-              {formatOdds(prediction.player1WinOddsRForest)}
-            </span>
-            <span className="odds-val">
-              {formatOdds(prediction.player2WinOddsRForest)}
-            </span>
-          </div>
+        <div className="player-stats">
+          <h4 className="player-sub-name">{player1Obj?.label.split(" ").pop()}</h4>
+          <p className={`odds-val ${isWinner(prediction.player1WinOddsLogistic, prediction.player2WinOddsLogistic)}`}>
+            {formatOdds(prediction.player1WinOddsLogistic)}%
+          </p>
+          <p className={`odds-val ${isWinner(prediction.player1WinOddsRForest, prediction.player2WinOddsRForest)}`}>
+            {formatOdds(prediction.player1WinOddsRForest)}%
+          </p>
+          <p className={`odds-val ${isWinner(prediction.player1WinOddsDTree, prediction.player2WinOddsDTree)}`}>
+            {formatOdds(prediction.player1WinOddsDTree)}%
+          </p>
         </div>
 
-        <div className="model-column">
-          <h4>D-Tree</h4>
-          <div className="odds-row">
-            <span className="odds-val">
-              {formatOdds(prediction.player1WinOddsDTree)}
-            </span>
-            <span className="odds-val">
-              {formatOdds(prediction.player2WinOddsDTree)}
-            </span>
-          </div>
+        <div className="player-stats">
+          <h4 className="player-sub-name">{player2Obj?.label.split(" ").pop()}</h4>
+          <p className={`odds-val ${isWinner(prediction.player2WinOddsLogistic, prediction.player1WinOddsLogistic)}`}>
+            {formatOdds(prediction.player2WinOddsLogistic)}%
+          </p>
+          <p className={`odds-val ${isWinner(prediction.player2WinOddsRForest, prediction.player1WinOddsRForest)}`}>
+            {formatOdds(prediction.player2WinOddsRForest)}%
+          </p>
+          <p className={`odds-val ${isWinner(prediction.player2WinOddsDTree, prediction.player1WinOddsDTree)}`}>
+            {formatOdds(prediction.player2WinOddsDTree)}%
+          </p>
         </div>
       </div>
 
-      <button
-        className="delete-icon-button"
-        onClick={() => onDelete(prediction.id)}
-        title="Delete Prediction"
-      >
+      <button className="delete-icon-button" onClick={() => onDelete(prediction.id)}>
         ×
       </button>
     </div>
