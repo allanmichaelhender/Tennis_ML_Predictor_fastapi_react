@@ -1,92 +1,95 @@
-/* Container for the whole list */
-.predictions-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
-  max-width: 600px; /* Slightly wider than the form for data visibility */
-  margin: 20px auto;
-}
 
-/* Individual Prediction Card */
-.prediction-container {
-  background: white;
-  padding: 24px;
+.prediction-card {
+  background: #ffffff;
   border-radius: 12px;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  position: relative; /* For positioning the delete button */
-  transition: transform 0.2s ease;
+  padding: 20px;
+  margin-bottom: 20px;
+  max-width: 600px;         
+  width: 90%;          /* Responsive: takes 90% of wrapper on small screens */
+  margin: 0 auto;      /* Extra safety to keep it centered */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  border-left: 5px solid #2ecc71; 
+  transition: transform 0.2s;
 }
 
-.prediction-container:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+.prediction-card:hover {
+  transform: translateY(-3px);
 }
 
-/* Header Styling */
-.prediction-id {
-  font-size: 12px;
-  font-weight: 700;
-  color: #9ca3af;
+.card-header {
+  text-align: center;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.matchup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.vs-badge {
+  background: #f1f1f1;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  color: #999;
+}
+
+.match-date {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  margin-top: 5px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  text-align: center;
+}
+
+.model-column h4 {
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color: #95a5a6;
   margin-bottom: 8px;
 }
 
-.match-info {
-  font-size: 16px;
-  font-weight: 600;
-  color: #111827;
-  border-bottom: 1px solid #f3f4f6;
-  padding-bottom: 12px;
-  margin-bottom: 16px;
-}
-
-/* Grid for the Odds Data */
-.odds-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Two columns: Player 1 and Player 2 */
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.odds-item {
-  background: #f9fafb;
-  padding: 10px;
-  border-radius: 8px;
-}
-
-.odds-label {
-  display: block;
-  font-size: 11px;
-  color: #6b7280;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-
-.odds-value {
-  display: block;
-  font-size: 15px;
-  color: #2563eb;
-  font-weight: 700;
-}
-
-/* Delete Button Styles */
-.delete-button {
-  background-color: #fee2e2;
-  color: #dc2626;
-  border: none;
-  padding: 8px 16px;
+.odds-row {
+  display: flex;
+  flex-direction: column;
+  background: #f8f9fa;
   border-radius: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  width: 100%; /* Full width on mobile/small cards */
+  padding: 8px 0;
 }
 
-.delete-button:hover {
-  background-color: #ef4444;
-  color: white;
+.odds-val {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #27ae60;
+}
+
+.odds-val:first-child {
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 4px;
+  margin-bottom: 4px;
+}
+
+.delete-icon-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #e74c3c;
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
 }

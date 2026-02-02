@@ -6,3 +6,17 @@
   font-family: Arial, sans-serif;
 
 }
+
+.home-wrapper {
+  max-width: 800px;    
+  margin: 0 auto;      
+  padding: 20px;
+}
+
+.predictions-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  width: 100%;        
+  gap: 20px;         
+}
