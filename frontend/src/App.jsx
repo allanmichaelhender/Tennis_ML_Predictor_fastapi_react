@@ -9,12 +9,16 @@ import { ACCESS_TOKEN } from "./constants";
 
 function Logout({ onLogout }) {
   localStorage.clear();
-  useEffect(() => { onLogout(); }, [onLogout]);
+  useEffect(() => {
+    onLogout();
+  }, [onLogout]);
   return <Navigate to="/login" />;
 }
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem(ACCESS_TOKEN));
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!localStorage.getItem(ACCESS_TOKEN),
+  );
 
   const updateAuthStatus = () => {
     setIsLoggedIn(!!localStorage.getItem(ACCESS_TOKEN));
@@ -22,12 +26,18 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navbar isLoggedIn={isLoggedIn} /> 
-      
+      <Navbar isLoggedIn={isLoggedIn} />
+
       <Routes>
         <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
-        <Route path="/login" element={<Login onLoginSuccess={updateAuthStatus} />} />
-        <Route path="/logout" element={<Logout onLogout={updateAuthStatus} />} />
+        <Route
+          path="/login"
+          element={<Login onLoginSuccess={updateAuthStatus} />}
+        />
+        <Route
+          path="/logout"
+          element={<Logout onLogout={updateAuthStatus} />}
+        />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
@@ -36,4 +46,3 @@ function App() {
 }
 
 export default App;
-

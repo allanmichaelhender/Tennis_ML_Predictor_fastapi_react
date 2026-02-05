@@ -16,12 +16,14 @@
   padding: 40px 32px;
   background: var(--bg-card);
   border-radius: var(--radius);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 
-              0 1px 2px -1px rgba(0, 0, 0, 0.1),
-              0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px -1px rgba(0, 0, 0, 0.1),
+    0 10px 15px -3px rgba(0, 0, 0, 0.05);
   max-width: 600px;
   border: 1px solid var(--border);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .form-input {
@@ -54,7 +56,9 @@
   font-weight: 600;
   font-size: 15px;
   cursor: pointer;
-  transition: transform 0.1s active, background-color 0.2s;
+  transition:
+    transform 0.1s active,
+    background-color 0.2s;
 }
 
 .form-button:hover {
@@ -66,7 +70,7 @@
 }
 
 .form-container label {
-  margin: 12px 0 4px 0;   /* Space above and below label */
+  margin: 12px 0 4px 0; /* Space above and below label */
   font-size: 13px;
   font-weight: 600;
   color: var(--text-muted);
@@ -74,8 +78,8 @@
 }
 
 .date-input-field {
-  min-height: 38px; 
-  margin-top: 4px
+  min-height: 38px;
+  margin-top: 4px;
 }
 
 .select-control {
@@ -85,14 +89,16 @@
 
 /* Ensures the dropdown menu matches the width of the input box */
 .select-menu {
-   background-color: #ffffff; 
+  background-color: #ffffff;
   width: 100%;
   box-sizing: border-box;
   z-index: 100;
   margin-top: 4px;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
   overflow: hidden; /* Ensures options don't spill over rounded corners */
 }
 
@@ -104,13 +110,12 @@
 
 .select-option {
   /* Increase the first value (top/bottom) for more vertical space */
-  padding: 10px 16px; 
-  
+  padding: 10px 16px;
+
   cursor: pointer;
   font-size: 14px;
   transition: background 0.2s ease;
 }
-
 
 .select-option.is-focused {
   background-color: #f3f4f6; /* Light gray */
@@ -125,7 +130,7 @@
 
 /* Optional: Add a checkmark or indicator to the selected item */
 .select-option.is-selected::after {
-  content: '✓';
+  content: "✓";
   float: right;
   font-size: 12px;
 }

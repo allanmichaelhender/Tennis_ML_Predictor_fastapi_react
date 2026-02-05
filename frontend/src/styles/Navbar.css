@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #1a2e1a; 
+  background-color: #1a2e1a;
   height: 70px;
   display: flex;
   justify-content: center;
@@ -7,15 +7,15 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-  backdrop-filter: blur(5px); 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
 }
 
 .navbar-container {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
-  gap: 50px; 
+  gap: 50px;
   width: 100%;
 }
 
@@ -30,7 +30,7 @@
 }
 
 .navbar-logo span {
-  color: #cddc39; 
+  color: #cddc39;
 }
 
 .nav-menu {
@@ -60,9 +60,9 @@
 .btn-primary {
   background-color: #27ae60;
   /* Reduced padding: 5px top/bottom, 15px left/right */
-  padding: 5px 15px; 
+  padding: 5px 15px;
   border-radius: 6px; /* Slightly sharper corners look more professional */
-  font-size: 0.9rem;  /* Smaller text to match other links */
+  font-size: 0.9rem; /* Smaller text to match other links */
   display: inline-flex;
   align-items: center;
   transition: all 0.3s ease;
@@ -71,11 +71,11 @@
 .btn-primary:hover {
   background-color: #2ecc71;
   transform: translateY(-1px); /* Subtle lift instead of a big scale */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .btn-logout {
-  border: 1px solid rgba(255,255,255,0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 6px 15px;
   border-radius: 4px;
   font-size: 0.9rem;
@@ -88,6 +88,6 @@
 
 @media (max-width: 600px) {
   .navbar-logo span {
-    display: none; 
+    display: none;
   }
 }
